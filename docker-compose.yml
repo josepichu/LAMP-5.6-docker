@@ -1,0 +1,23 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7.11
+    ports:
+      - "3308:3306" # externaly use 3308 example mysql workbench localhost: 3308)  
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=gestortft_eiic   
+  app:
+    image: php-mysql
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www/html/
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - MYSQL_SERVER=db
+      - MYSQL_PASSWORD=root
+      - MYSQL_USER=root
