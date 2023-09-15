@@ -1,4 +1,8 @@
 FROM php:5.6-apache
+
+# fix https://unix.stackexchange.com/questions/743839/apt-get-update-failed-to-fetch-debian-amd64-packages-while-building-dockerfile-f
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y \
         libmcrypt-dev \
         libzip-dev \
